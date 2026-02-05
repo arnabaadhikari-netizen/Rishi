@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>For You</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+
+  <!-- CSS: HOW IT LOOKS -->
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .screen {
+      height: 100vh;
+      background-image: url("us.jpg"); /* YOUR PHOTO */
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(4px);
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      padding: 20px;
+    }
+
+    .slide {
+      font-family: 'Playfair Display', serif;
+      font-size: 34px;
+      max-width: 750px;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+
+    .slide.active {
+      opacity: 1;
+    }
+
+    button {
+      margin-top: 40px;
+      padding: 12px 32px;
+      border-radius: 30px;
+      border: none;
+      font-size: 16px;
+      background: #d4a373;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- WHAT YOU SEE -->
+  <div class="screen">
+    <div class="overlay"></div>
+
+    <div class="content">
+      <div class="slide active" id="slideText"></div>
+      <button id="nextBtn" onclick="nextSlide()">Next →</button>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT: HOW SLIDES CHANGE -->
+  <script>
+    const slides = [
+      "I made something small for you.",
+      "Because some moments deserve to be held gently.",
+      "Like the way you make me smile without trying.",
+      "How being around you feels easy.",
+      "This is me choosing honesty.",
+      "I like you — softly, sincerely.",
+      "So I wanted to ask you something.",
+      "Will you be my Valentine? 💖"
+    ];
+
+    let currentSlide = 0;
+    const slideText = document.getElementById("slideText");
+    const button = document.getElementById("nextBtn");
+
+    slideText.textContent = slides[currentSlide];
+    slideText.classList.add("active");
+
+    function nextSlide() {
+      slideText.classList.remove("active");
+
+      setTimeout(() => {
+        currentSlide++;
+
+        if (currentSlide < slides.length) {
+          slideText.textContent = slides[currentSlide];
+          slideText.classList.add("active");
+
+          if (currentSlide === slides.length - 1) {
+            button.textContent = "💌";
+          }
+        }
+      }, 400);
+    }
+  </script>
+
+</body>
+</html>
